@@ -2,7 +2,7 @@
   "name": "file-match",
   "version": "1.0.1",
   "description": "Match filepath is validated, or exclude filepath that don't need.",
-  "main": "filepath-match.js",
+  "main": "file-match.js",
   "scripts": {
     "test": "mocha test"
   },
