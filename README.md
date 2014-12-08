@@ -26,3 +26,15 @@ filter('img/path/demo.png')     // false
 
 If the filter value is empty string or empty arry, it will always return false,
 if it's ``null``, will always return true.
+
+#### filter description
+* `*.js`  only match js files in current dir.
+* `**/*.js` match all js files.
+* `path/*.js` match js files in path.
+* `!*.js` exclude js files in current dir.
+* ``.{jpg,png,gif}`` means jpg, png or gif
+```
+'**/*'                 // Match all files
+'!**/*.js'             // Exclude all js files
+'**/*.{jpg,png,gif}'   // Match jpg, png, or gif files
+```
