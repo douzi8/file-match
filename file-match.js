@@ -8,7 +8,7 @@ var util = require('utils-extend');
  * 'path/*.js' match js files in path
  * '!*.js' exclude js files 
  */
-function fileMatch(filter) {
+function fileMatch(filter, ignore) {
   if (filter === null) {
     return function() {
       return true;
@@ -25,6 +25,7 @@ function fileMatch(filter) {
 
   var match = [];
   var negate = [];
+  var isIgnore = ignore ? 'i' : '';
 
   filter.forEach(function(item) {
     var isNegate = item.indexOf('!') === 0;
@@ -60,8 +61,8 @@ function fileMatch(filter) {
     }
   });
 
-  match = match.length ?  new RegExp(match.join('|')) : null;
-  negate = negate.length ? new RegExp(negate.join('|')) : null;
+  match = match.length ?  new RegExp(match.join('|'), isIgnore) : null;
+  negate = negate.length ? new RegExp(negate.join('|'), isIgnore) : null;
 
   return function(filepath) {
     // Normalize \\ paths to / paths.

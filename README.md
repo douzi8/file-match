@@ -22,6 +22,11 @@ filter('path/demo.js')          // false
 filter('path/path/demo.js')     // true
 filter('img/demo.png')          // false
 filter('img/path/demo.png')     // false
+
+var filter = fileMatch([
+  'path/*.js'
+], true);
+
 ```
 
 If the filter value is empty string or empty arry, it will always return false,
@@ -38,3 +43,6 @@ if it's ``null``, will always return true.
 '!**/*.js'             // Exclude all js files
 '**/*.{jpg,png,gif}'   // Match jpg, png, or gif files
 ```
+
+### ignore case
+* ignore {boolean} [ignore = false]

@@ -65,5 +65,18 @@ describe('File match', function() {
       assert.equal(false, filter('dest/demo.css'));
       assert.equal(false, filter('img/dest/demo.jpg'));
     });
+
+    it('Ignore case', function() {
+      var filter = fileMatch([
+        'path/demo.js'
+      ]);
+
+      var filter2 = fileMatch([
+        'path/demo.js'
+      ], true);
+
+      assert.equal(false, filter('path/DEMO.js'));
+      assert.equal(true, filter2('path/DEMO.js'));
+    });
   });
 });
