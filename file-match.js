@@ -1,4 +1,3 @@
-var util = require('utils-extend');
 /**
  * @description
  * @example
@@ -6,20 +5,26 @@ var util = require('utils-extend');
  * `*.js`  only match current dir files
  * '**\/*.js' match all js files
  * 'path/*.js' match js files in path
- * '!*.js' exclude js files 
+ * '!*.js' exclude js files
  */
 function fileMatch(filter, ignore) {
   if (filter === null) {
     return function() {
       return true;
     };
-  } else if (filter === '' || (util.isArray(filter) && !filter.length)) {
+  } else if (filter === '' || (Array.isArray(filter) && !filter.length)) {
     return function() {
       return false;
     };
   }
+  var unixifyPath = function(filepath) {
+    return filepath.replace(/\\/g, '/');
+  }
+  var isString = function(value) {
+    return toString.call(value) === '[object String]'
+  }
 
-  if (util.isString(filter)) {
+  if (isString(filter)) {
     filter = [filter];
   }
 
@@ -66,7 +71,7 @@ function fileMatch(filter, ignore) {
 
   return function(filepath) {
     // Normalize \\ paths to / paths.
-    filepath = util.path.unixifyPath(filepath);
+    filepath = unixifyPath(filepath);
 
     if (negate && negate.test(filepath)) {
       return false;
